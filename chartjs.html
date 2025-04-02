@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Kitchen - Napi Eladott Mennyiség</title>
+  <!-- ChartJS CDN betöltése -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    tr:hover {
+      background-color: #f2f2f2;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+</header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+      <li><a href="menu.html" id="menuLink">Menü</a></li>
+      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+      <li><a href="order.html" id="orderLink">Rendelés</a></li>
+      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+      <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
+      <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
+      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+    </ul>
+  </nav>
+  
+  <!-- Aside elem hozzáadása -->
+  <aside>
+    <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
+  </aside>
+
+  <div id="content">
+    <h2>Napi Eladott Mennyiség Összesítése</h2>
+    <p>A táblázatban az első oszlop az ételkategóriákat, a többi oszlop pedig a hét napjait jelöli. Kattints egy sorra, hogy vonaldiagramon lásd az adott kategória napi eladott mennyiségét!</p>
+    
+    <!-- Táblázat: az első oszlop a kategória, a következő 7 oszlop a hét napjai -->
+    <table id="salesTable">
+      <thead>
+        <tr>
+          <th>Kategória</th>
+          <th>Hétfő</th>
+          <th>Kedd</th>
+          <th>Szerda</th>
+          <th>Csütörtök</th>
+          <th>Péntek</th>
+          <th>Szombat</th>
+          <th>Vasárnap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leves</td>
+          <td>12</td>
+          <td>15</td>
+          <td>13</td>
+          <td>14</td>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+        </tr>
+        <tr>
+          <td>Főétel</td>
+          <td>25</td>
+          <td>26</td>
+          <td>24</td>
+          <td>27</td>
+          <td>28</td>
+          <td>29</td>
+          <td>30</td>
+        </tr>
+        <tr>
+          <td>Desszert</td>
+          <td>8</td>
+          <td>9</td>
+          <td>8</td>
+          <td>9</td>
+          <td>10</td>
+          <td>11</td>
+          <td>12</td>
+        </tr>
+        <tr>
+          <td>Köret</td>
+          <td>10</td>
+          <td>11</td>
+          <td>10</td>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>Vegetáriánus</td>
+          <td>14</td>
+          <td>15</td>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+          <td>19</td>
+          <td>20</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- A diagram megjelenítéséhez szolgáló canvas -->
+    <canvas id="salesChart" width="400" height="200"></canvas>
+  </div>
+
+  <footer>
+    <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
+    <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
+  </footer>
+
+  <script>
+    // A táblázat és a diagram elemek lekérése
+    const salesTable = document.getElementById("salesTable");
+    const tbody = salesTable.querySelector("tbody");
+    const rows = tbody.getElementsByTagName("tr");
+    let salesChart = null;
+
+    // Függvény a diagram létrehozásához
+    function createSalesChart(data, category) {
+      const ctx = document.getElementById("salesChart").getContext("2d");
+      if (salesChart !== null) {
+        salesChart.destroy();
+      }
+      salesChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat", "Vasárnap"],
+          datasets: [{
+            label: category + " eladott mennyiség",
+            data: data,
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 2,
+            fill: false
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    }
+
+    // Minden sorhoz esemény hozzárendelése: kattintáskor a sor adatait olvassuk be és diagramot jelenítünk meg
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].addEventListener("click", function() {
+        const cells = this.getElementsByTagName("td");
+        let rowData = [];
+        // Az első cella a kategória, a többi a napi eladott mennyiség
+        for (let j = 1; j < cells.length; j++) {
+          rowData.push(Number(cells[j].textContent));
+        }
+        const category = cells[0].textContent;
+        createSalesChart(rowData, category);
+      });
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPage = window.location.pathname.split("/").pop();
+      const navLinks = document.querySelectorAll("nav ul li a");
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute("href");
+        if(linkPage === currentPage) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    });
+    </script>
+    
+</body>
+</html>

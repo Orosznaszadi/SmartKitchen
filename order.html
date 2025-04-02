@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendelés - Smart Kitchen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="rendeles-page">
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+
+    <nav>
+        <ul>
+          <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+          <li><a href="menu.html" id="menuLink">Menü</a></li>
+          <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+          <li><a href="order.html" id="orderLink" class="active">Rendelés</a></li>
+          <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+          <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
+          <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
+          <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        </ul>
+    </nav>
+      
+    <!-- Aside elem -->
+    <aside>
+        <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
+    </aside>
+
+    <div id="content">
+        <h2>Bevásárlókosár</h2>
+        <table id="cart">
+            <thead>
+                <tr>
+                    <th>Étel</th>
+                    <th>Ár</th>
+                    <th>Mennyiség</th>
+                    <th>Összeg</th>
+                    <th>Törlés</th>
+                </tr>
+            </thead>
+            <tbody id="cartBody">
+                <!-- A kosár tartalma ide kerül -->
+            </tbody>
+        </table>
+        <h3>Összesen: <span id="totalPrice">0</span> Ft</h3>
+    </div>
+
+    <footer>
+        <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
+        <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
+    </footer>
+
+    <script>
+      function loadCart() {
+        const cartBody = document.getElementById("cartBody");
+        const totalPriceElem = document.getElementById("totalPrice");
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cartBody.innerHTML = "";
+        let totalPrice = 0;
+        cart.forEach(item => {
+          const row = document.createElement("tr");
+
+          const foodCell = document.createElement("td");
+          foodCell.textContent = item.name;
+          row.appendChild(foodCell);
+
+          const priceCell = document.createElement("td");
+          priceCell.textContent = item.price + " Ft";
+          row.appendChild(priceCell);
+
+          const quantityCell = document.createElement("td");
+          quantityCell.textContent = item.quantity;
+          row.appendChild(quantityCell);
+
+          const sumCell = document.createElement("td");
+          const sum = item.price * item.quantity;
+          sumCell.textContent = sum + " Ft";
+          row.appendChild(sumCell);
+
+          const actionCell = document.createElement("td");
+          const removeBtn = document.createElement("button");
+          removeBtn.textContent = "Törlés";
+          removeBtn.addEventListener("click", function() {
+            let removeQtyStr = prompt("Hány adagot szeretnél törölni?", "1");
+            let removeQty = parseInt(removeQtyStr, 10);
+            if (isNaN(removeQty) || removeQty < 1) {
+              alert("Érvénytelen mennyiség!");
+              return;
+            }
+            if (item.quantity > removeQty) {
+              item.quantity -= removeQty;
+            } else {
+              cart = cart.filter(cartItem => cartItem.id !== item.id);
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+          });
+          actionCell.appendChild(removeBtn);
+          row.appendChild(actionCell);
+
+          cartBody.appendChild(row);
+          totalPrice += sum;
+        });
+        totalPriceElem.textContent = totalPrice;
+      }
+      
+      document.addEventListener("DOMContentLoaded", loadCart);
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const currentPage = window.location.pathname.split("/").pop();
+        const navLinks = document.querySelectorAll("nav ul li a");
+        navLinks.forEach(link => {
+          const linkPage = link.getAttribute("href").split("/").pop();
+          if (linkPage === currentPage) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      });
+    </script>
+  
+</body>
+</html>

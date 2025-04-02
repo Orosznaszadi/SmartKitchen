@@ -1,0 +1,150 @@
+/* Alap stílusok a testhez */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Fejléc stílusai */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Navigációs menü stílusai */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 10px;
+}
+
+nav ul li a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Aktív menüpont aláhúzása */
+nav a.active {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Menü szekció stílusai */
+#menu-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#menu-section h2 {
+    color: #4CAF50;
+}
+
+#menu-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#menu-section ul li {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/* Táblázat stílusai */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    table-layout: fixed; /* Fixált elrendezés */
+}
+
+table th, table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #ff6600;
+    color: white;
+}
+
+/* Fejléc rögzítése */
+th {
+    position: sticky;
+    top: 0;
+    background-color: #ff6600;
+    z-index: 1; /* A fejléc a tartalom felett marad */
+}
+
+/* Alternatív sorok színezése */
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Menü táblázat specifikus stílusai */
+#menu-management {
+    margin-top: 20px;
+}
+
+#menu-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#menu-table th, #menu-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#menu-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Gombok stílusai */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Lábléc stílusai */
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Táblázat cellák fix elrendezése */
+#menuTable td {
+    word-wrap: break-word;
+    text-align: left;
+}
+
+/* Akció gombok oszlopának fixálása */
+#menuTable td.actions {
+    text-align: center;
+}

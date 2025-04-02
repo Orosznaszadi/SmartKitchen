@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Kitchen - OOJS Alkalmazás</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Egyszerű stílus a rendelés elemek megjelenítéséhez */
+    #orderContainer div {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+</header>
+  
+  <nav>
+    <ul>
+      <li><a href="index.html">Kezdőlap</a></li>
+      <li><a href="menu.html">Menü</a></li>
+      <li><a href="contact.html">Kapcsolat</a></li>
+      <li><a href="order.html">Rendelés</a></li>
+      <li><a href="chartjs.html">Eladások</a></li>
+      <li><a href="ajax.html">AJAX</a></li>
+      <li><a href="html5_menu.html">HTML5 API-k</a></li>
+      <li><a href="oojs.html" class="active">OOJS</a></li>
+    </ul>
+  </nav>
+  <!-- Aside elem hozzáadása -->
+  <aside>
+    <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
+  </aside>
+  
+  <div id="content">
+    <h2>OOJS Alkalmazás - Rendeléskezelés</h2>
+    <p>Az alábbi példában egy egyszerű rendeléskezelő alkalmazás működik objektumorientált JavaScript (OOJS) módszerekkel. A megoldásban szerepelnek class, constructor, metódusok, document.body.appendChild, valamint extends és super is.</p>
+    <div id="orderContainer"></div>
+  </div>
+  
+  <footer>
+    <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
+    <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
+  </footer>
+  
+  <script>
+    // Alap rendelés osztály
+    class Order {
+      constructor(product, quantity, price) {
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+      }
+      
+      // Számolja ki a teljes árat (mennyiség * ár)
+      getTotal() {
+        return this.quantity * this.price;
+      }
+      
+      // Létrehozza a rendelés megjelenítéséhez szükséges DOM elemet
+      render() {
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${this.product}</strong> - Mennyiség: ${this.quantity}, Ár: ${this.price} Ft, Összesen: ${this.getTotal()} Ft`;
+        return div;
+      }
+    }
+    
+    // Speciális rendelés osztály, kedvezménnyel
+    class SpecialOrder extends Order {
+      constructor(product, quantity, price, discount) {
+        super(product, quantity, price); // Alapadatok inicializálása
+        this.discount = discount; // Kedvezmény százalékban
+      }
+      
+      // Felülírjuk a getTotal metódust, hogy kedvezményt is alkalmazzon
+      getTotal() {
+        const total = super.getTotal();
+        return total - (total * this.discount / 100);
+      }
+      
+      // Felülírjuk a render metódust, hogy a kedvezmény is megjelenjen
+      render() {
+        const div = super.render();
+        const discountInfo = document.createElement("p");
+        discountInfo.textContent = `Kedvezmény: ${this.discount}% - Kedvezménnyel: ${this.getTotal()} Ft`;
+        div.appendChild(discountInfo);
+        return div;
+      }
+    }
+    
+    // Amikor az oldal betöltődik, példányosítunk néhány rendelést és hozzáadjuk őket a DOM-hoz
+    document.addEventListener("DOMContentLoaded", function() {
+      const container = document.getElementById("orderContainer");
+      
+      // Példák rendelésekre
+      const order1 = new Order("Leves", 2, 1200);
+      const order2 = new Order("Főétel", 1, 2500);
+      const order3 = new Order("Desszert", 3, 800);
+      const specialOrder = new SpecialOrder("Vegetáriánus", 4, 1500, 10); // 10% kedvezmény
+      
+      // Hozzáadjuk a rendeléseket a konténerhez
+      container.appendChild(order1.render());
+      container.appendChild(order2.render());
+      container.appendChild(order3.render());
+      container.appendChild(specialOrder.render());
+    });
+  </script>
+</body>
+</html>

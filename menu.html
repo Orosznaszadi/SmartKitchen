@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Étlap - Smart Kitchen</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+      <li><a href="menu.html" id="menuLink" class="active">Menü</a></li>
+      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+      <li><a href="order.html" id="orderLink">Rendelés</a></li>
+      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+      <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
+      <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
+      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+    </ul>
+  </nav>
+      
+  <!-- Aside elem -->
+  <aside>
+    <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
+  </aside>
+  
+  <div id="content">
+    <button id="addItem">Új étel hozzáadása</button>
+    <h2>Étlap</h2>
+    <!-- Keresőmező -->
+    <div id="searchInput-container">
+      <input type="text" id="searchInput" placeholder="Keresés...">
+    </div>
+    <div id="menuTableContainer">
+      <table id="menuTable">
+        <thead>
+          <tr>
+            <th>Étel</th>
+            <th>Ár (Ft)</th>
+            <th>Kategória</th>
+            <th>Elérhetőség</th>
+            <th>Művelet</th>
+            <th>Kosárba</th> <!-- Új oszlop a kosárba gombnak -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-id="1">
+            <td>Paprikás csirke</td>
+            <td>2500</td>
+            <td>Főétel</td>
+            <td class="availability">Elérhető</td>
+            <td class="actions">
+              <button class="edit">Szerkesztés</button>
+              <button class="delete">Törlés</button>
+            </td>
+            <td>
+              <button class="addToCartBtn">Kosárba</button>
+            </td>
+          </tr>
+          <tr data-id="2">
+            <td>Rántott sajt</td>
+            <td>2200</td>
+            <td>Vegetáriánus</td>
+            <td class="availability">Elérhető</td>
+            <td class="actions">
+              <button class="edit">Szerkesztés</button>
+              <button class="delete">Törlés</button>
+            </td>
+            <td>
+              <button class="addToCartBtn">Kosárba</button>
+            </td>
+          </tr>
+          <tr data-id="3">
+            <td>Gulyásleves</td>
+            <td>1800</td>
+            <td>Leves</td>
+            <td class="availability">Elérhető</td>
+            <td class="actions">
+              <button class="edit">Szerkesztés</button>
+              <button class="delete">Törlés</button>
+            </td>
+            <td>
+              <button class="addToCartBtn">Kosárba</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
+    <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
+  </footer>
+
+  <script src="menu.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPage = window.location.pathname.split("/").pop();
+      const navLinks = document.querySelectorAll("nav ul li a");
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute("href").split("/").pop();
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    });
+  </script>
+  
+  <!-- Új script a kosárba adáshoz -->
+  <script>
+    // Függvény, ami hozzáadja a terméket a kosárhoz (localStorage)
+    function addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existing = cart.find(item => item.id === product.id);
+      if (existing) {
+        existing.quantity += product.quantity;
+      } else {
+        cart.push(product);
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(product.name + " " + product.quantity + " adag kosárba került!");
+    }
+
+    // Eseménykezelő hozzáadása minden "Kosárba" gombhoz
+    document.querySelectorAll(".addToCartBtn").forEach(button => {
+      button.addEventListener("click", function() {
+        const row = this.closest("tr");
+        const id = row.getAttribute("data-id") || Date.now();
+        const name = row.cells[0].textContent.trim();
+        const price = parseFloat(row.cells[1].textContent.trim());
+        const category = row.cells[2].textContent.trim();
+        const availability = row.cells[3].textContent.trim();
+        let qtyStr = prompt("Hány adagot szeretnél rendelni?", "1");
+        let quantity = parseInt(qtyStr, 10);
+        if (isNaN(quantity) || quantity < 1) {
+          alert("Érvénytelen mennyiség!");
+          return;
+        }
+        const product = { id, name, price, category, availability, quantity };
+        addToCart(product);
+      });
+    });
+  </script>
+  
+</body>
+</html>
