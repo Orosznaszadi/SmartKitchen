@@ -7,22 +7,27 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Web-programozás-1 Előadás Házi feladat</h1>
-</header>
+    <header>
+        <h1>Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
   
-  <nav>
-    <ul>
-      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
-      <li><a href="menu.html" id="menuLink">Menü</a></li>
-      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
-      <li><a href="order.html" id="orderLink">Rendelés</a></li>
-      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
-      <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
-      <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
-      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-    </ul>
-</nav>
+    <nav>
+        <ul>
+          <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+          <li><a href="menu.html" id="menuLink">Menü</a></li>
+          <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+          <li><a href="order.html" id="orderLink">Rendelés</a></li>
+          <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+          <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
+          <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
+          <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        </ul>
+    </nav>
+      
+    <!-- Aside elem -->
+    <aside>
+      <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
+    </aside>
   
   <div id="content">
     <h2>AJAX CRUD Felület</h2>
@@ -62,5 +67,20 @@
   </footer>
   
   <script src="ajax.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPage = window.location.pathname.split("/").pop();
+      const navLinks = document.querySelectorAll("nav ul li a");
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute("href");
+        if(linkPage === currentPage) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    });
+  </script>
+    
 </body>
 </html>

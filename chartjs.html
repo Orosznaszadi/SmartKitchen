@@ -42,7 +42,7 @@
     </ul>
   </nav>
   
-  <!-- Aside elem hozzáadása -->
+  <!-- Aside elem -->
   <aside>
     <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
   </aside>
@@ -129,13 +129,11 @@
   </footer>
 
   <script>
-    // A táblázat és a diagram elemek lekérése
     const salesTable = document.getElementById("salesTable");
     const tbody = salesTable.querySelector("tbody");
     const rows = tbody.getElementsByTagName("tr");
     let salesChart = null;
 
-    // Függvény a diagram létrehozásához
     function createSalesChart(data, category) {
       const ctx = document.getElementById("salesChart").getContext("2d");
       if (salesChart !== null) {
@@ -162,12 +160,10 @@
       });
     }
 
-    // Minden sorhoz esemény hozzárendelése: kattintáskor a sor adatait olvassuk be és diagramot jelenítünk meg
     for (let i = 0; i < rows.length; i++) {
       rows[i].addEventListener("click", function() {
         const cells = this.getElementsByTagName("td");
         let rowData = [];
-        // Az első cella a kategória, a többi a napi eladott mennyiség
         for (let j = 1; j < cells.length; j++) {
           rowData.push(Number(cells[j].textContent));
         }
@@ -189,7 +185,7 @@
         }
       });
     });
-    </script>
+  </script>
     
 </body>
 </html>

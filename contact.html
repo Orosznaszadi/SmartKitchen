@@ -22,8 +22,13 @@
           <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
           <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
         </ul>
-    </nav>
-
+      </nav>
+      
+    <!-- Aside elem -->
+  <aside>
+    <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
+  </aside>
+    
     <div id="content">
         <h2>Kapcsolat</h2>
         <p>Elérhetőségünk:</p>
@@ -35,8 +40,18 @@
     <footer>
         <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
         <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
-      </footer>
+    </footer>
 
-    <script src="script.js"></script>
+    <script>
+        const menuLinks = document.querySelectorAll("nav a");
+        const currentLocation = window.location.pathname;
+        menuLinks.forEach(link => {
+            if (link.href.includes(currentLocation)) {
+                link.classList.add("active");
+            } else {
+                link.classList.remove("active");
+            }
+        });
+    </script>
 </body>
 </html>

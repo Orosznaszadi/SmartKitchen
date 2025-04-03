@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // API URL és egyedi kód (a formátum: BBBBBBefg456, itt add meg a sajátodat)
     const apiUrl = "http://gamf.nhely.hu/ajax2/";
-    const code = "ABCDEFxyz123";  // Cseréld ki a saját kódodra!
+    const code = "QS3OF7F1WQL0smartk"; // Közös kód Krisztina és Szabolcs részére
 
     const dataListDiv = document.getElementById("dataList");
     const statsDiv = document.getElementById("stats");
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let html = "";
         if (data.list && data.list.length > 0) {
             data.list.forEach(item => {
-                html += `<p>ID: ${item.id} - Termék: ${item.name}, Eladott mennyiség: ${item.height}, Ár: ${item.weight}</p>`;
+                html += <p>ID: ${item.id} - Termék: ${item.name}, Eladott mennyiség: ${item.height}, Ár: ${item.weight}</p>;
             });
         } else {
             html = "<p>Nincs megjeleníthető adat.</p>";
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const sum = values.reduce((a, b) => a + b, 0);
         const avg = sum / values.length;
         const max = Math.max(...values);
-        statsDiv.innerHTML = `<p>Összeg: ${sum}, Átlag: ${avg.toFixed(2)}, Legnagyobb: ${max}</p>`;
+        statsDiv.innerHTML = <p>Összeg: ${sum}, Átlag: ${avg.toFixed(2)}, Legnagyobb: ${max}</p>;
     }
     
     // Create művelet: új rekord létrehozása

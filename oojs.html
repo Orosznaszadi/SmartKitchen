@@ -18,7 +18,7 @@
 <body>
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
-</header>
+  </header>
   
   <nav>
     <ul>
@@ -32,7 +32,8 @@
       <li><a href="oojs.html" class="active">OOJS</a></li>
     </ul>
   </nav>
-  <!-- Aside elem hozzáadása -->
+  
+  <!-- Aside elem -->
   <aside>
     <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
   </aside>
@@ -57,12 +58,10 @@
         this.price = price;
       }
       
-      // Számolja ki a teljes árat (mennyiség * ár)
       getTotal() {
         return this.quantity * this.price;
       }
       
-      // Létrehozza a rendelés megjelenítéséhez szükséges DOM elemet
       render() {
         const div = document.createElement("div");
         div.innerHTML = `<strong>${this.product}</strong> - Mennyiség: ${this.quantity}, Ár: ${this.price} Ft, Összesen: ${this.getTotal()} Ft`;
@@ -73,17 +72,15 @@
     // Speciális rendelés osztály, kedvezménnyel
     class SpecialOrder extends Order {
       constructor(product, quantity, price, discount) {
-        super(product, quantity, price); // Alapadatok inicializálása
-        this.discount = discount; // Kedvezmény százalékban
+        super(product, quantity, price);
+        this.discount = discount;
       }
       
-      // Felülírjuk a getTotal metódust, hogy kedvezményt is alkalmazzon
       getTotal() {
         const total = super.getTotal();
         return total - (total * this.discount / 100);
       }
       
-      // Felülírjuk a render metódust, hogy a kedvezmény is megjelenjen
       render() {
         const div = super.render();
         const discountInfo = document.createElement("p");
@@ -93,17 +90,13 @@
       }
     }
     
-    // Amikor az oldal betöltődik, példányosítunk néhány rendelést és hozzáadjuk őket a DOM-hoz
     document.addEventListener("DOMContentLoaded", function() {
       const container = document.getElementById("orderContainer");
-      
-      // Példák rendelésekre
       const order1 = new Order("Leves", 2, 1200);
       const order2 = new Order("Főétel", 1, 2500);
       const order3 = new Order("Desszert", 3, 800);
-      const specialOrder = new SpecialOrder("Vegetáriánus", 4, 1500, 10); // 10% kedvezmény
+      const specialOrder = new SpecialOrder("Vegetáriánus", 4, 1500, 10);
       
-      // Hozzáadjuk a rendeléseket a konténerhez
       container.appendChild(order1.render());
       container.appendChild(order2.render());
       container.appendChild(order3.render());
