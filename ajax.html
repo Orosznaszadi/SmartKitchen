@@ -3,62 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Kitchen - AJAX</title>
+  <title>Smart Kitchen - AJAX CRUD</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Extra stílusok a AJAX formhoz – konyhai, modern megjelenés */
+    .ajax-container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .ajax-container h2 {
+      text-align: center;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+    .ajax-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .ajax-container form label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .ajax-container form input[type="text"],
+    .ajax-container form input[type="number"] {
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .ajax-container form button {
+      margin-top: 15px;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .ajax-container form button:hover {
+      background-color: #45a049;
+    }
+    .ajax-container .crud-buttons {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+    .ajax-container .crud-buttons button {
+      flex: 1 1 48%;
+      margin: 5px 0;
+    }
+    .ajax-container .data-display {
+      margin-top: 20px;
+      font-size: 1em;
+      line-height: 1.5;
+    }
+    .ajax-container .stats {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Web-programozás-1 Előadás Házi feladat</h1>
-    </header>
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+      <li><a href="menu.html" id="menuLink">Menü</a></li>
+      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+      <li><a href="order.html" id="orderLink">Rendelés</a></li>
+      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+      <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
+      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+    </ul>
+  </nav>
   
-    <nav>
-        <ul>
-          <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
-          <li><a href="menu.html" id="menuLink">Menü</a></li>
-          <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
-          <li><a href="order.html" id="orderLink">Rendelés</a></li>
-          <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
-          <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
-          <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
-          <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-        </ul>
-    </nav>
-      
-    <!-- Aside elem -->
-    <aside>
-      <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
-    </aside>
+  <!-- Aside elem: itt elhelyezhetsz közösségi média linkeket stb. -->
+  <aside>
+  </div>
+  <!-- Közösségi média elérhetőségek -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<div class="social-links">
+<a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+<i class="fab fa-facebook-f"></i>
+</a>
+<a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+<i class="fab fa-instagram"></i>
+</a>
+</div>
+  </aside>
   
+  <!-- AJAX CRUD Felület fő tartalma -->
   <div id="content">
-    <h2>AJAX CRUD Felület</h2>
-    <p>Az alábbi űrlap segítségével kezelheted a Smart Kitchen adatait. A mezőkben maximum 30 karakter engedélyezett, és egyik mező sem lehet üres.</p>
-    
-    <form id="ajaxForm">
-      <label for="name">Termék neve:</label>
-      <input type="text" id="name" name="name" maxlength="30" required><br>
-      
-      <label for="height">Eladott mennyiség:</label>
-      <input type="text" id="height" name="height" maxlength="30" required><br>
-      
-      <label for="weight">Ár (Ft):</label>
-      <input type="text" id="weight" name="weight" maxlength="30" required><br>
-      
-      <button type="button" id="createBtn">Létrehozás</button>
-      <button type="button" id="updateBtn">Módosítás</button>
-    </form>
-    
-    <br>
-    
-    <label for="updateId">Módosítandó rekord ID:</label>
-    <input type="text" id="updateId" name="updateId">
-    <button type="button" id="getDataForIdBtn">Adatok betöltése ID alapján</button>
-    <button type="button" id="deleteBtn">Törlés</button>
-    
-    <h3>Adatok listája</h3>
-    <div id="dataList"></div>
-    
-    <h3>Statisztikák a "Eladott mennyiség" értékekről</h3>
-    <div id="stats"></div>
+    <div class="ajax-container">
+      <h2>AJAX CRUD Felület</h2>
+      <p>Az alábbi űrlap segítségével kezelheted a Smart Kitchen adatait. Minden mező megadása kötelező, és maximum 30 karakter engedélyezett.</p>
+      <form id="ajaxForm">
+        <label for="name">Termék neve:</label>
+        <input type="text" id="name" name="name" maxlength="30" placeholder="Pl. Paprikás csirke" required>
+        
+        <label for="height">Eladott mennyiség:</label>
+        <input type="text" id="height" name="height" maxlength="30" placeholder="Pl. 25" required>
+        
+        <label for="weight">Ár (Ft):</label>
+        <input type="text" id="weight" name="weight" maxlength="30" placeholder="Pl. 2500" required>
+        
+        <div class="crud-buttons">
+          <button type="button" id="createBtn">Létrehozás</button>
+          <button type="button" id="updateBtn">Módosítás</button>
+        </div>
+      </form>
+      <div style="margin-top:15px;">
+        <label for="updateId">Módosítandó rekord ID:</label>
+        <input type="text" id="updateId" name="updateId" placeholder="Rekord ID">
+        <div class="crud-buttons">
+          <button type="button" id="getDataForIdBtn">Adatok betöltése ID alapján</button>
+          <button type="button" id="deleteBtn">Törlés</button>
+        </div>
+      </div>
+      <h3>Adatok listája</h3>
+      <div id="dataList" class="data-display"></div>
+      <h3>Statisztikák a "Eladott mennyiség" értékekről</h3>
+      <div id="stats" class="stats"></div>
+    </div>
   </div>
   
   <footer>
@@ -66,6 +144,7 @@
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
   
+  <!-- Script hivatkozások -->
   <script src="ajax.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -73,7 +152,7 @@
       const navLinks = document.querySelectorAll("nav ul li a");
       navLinks.forEach(link => {
         const linkPage = link.getAttribute("href");
-        if(linkPage === currentPage) {
+        if (linkPage === currentPage) {
           link.classList.add("active");
         } else {
           link.classList.remove("active");
@@ -81,6 +160,5 @@
       });
     });
   </script>
-    
 </body>
 </html>

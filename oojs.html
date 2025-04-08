@@ -6,12 +6,38 @@
   <title>Smart Kitchen - OOJS Alkalmazás</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Egyszerű stílus a rendelés elemek megjelenítéséhez */
-    #orderContainer div {
-      border: 1px solid #ccc;
+    /* Új stílusok az OOJS kártya elrendezéséhez */
+    #orderContainer {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    #orderContainer h2 {
+      text-align: center;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+    .order-item {
       padding: 10px;
-      margin: 10px 0;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
       background-color: #f9f9f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .order-item p {
+      margin: 0;
+      font-size: 1em;
+    }
+    .special-order {
+      border-color: #FF9800;
+      background-color: #FFF3E0;
     }
   </style>
 </head>
@@ -19,7 +45,6 @@
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
   </header>
-  
   <nav>
     <ul>
       <li><a href="index.html">Kezdőlap</a></li>
@@ -28,63 +53,69 @@
       <li><a href="order.html">Rendelés</a></li>
       <li><a href="chartjs.html">Eladások</a></li>
       <li><a href="ajax.html">AJAX</a></li>
-      <li><a href="html5_menu.html">HTML5 API-k</a></li>
       <li><a href="oojs.html" class="active">OOJS</a></li>
     </ul>
   </nav>
-  
   <!-- Aside elem -->
   <aside>
-    <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
-  </aside>
-  
-  <div id="content">
-    <h2>OOJS Alkalmazás - Rendeléskezelés</h2>
-    <p>Az alábbi példában egy egyszerű rendeléskezelő alkalmazás működik objektumorientált JavaScript (OOJS) módszerekkel. A megoldásban szerepelnek class, constructor, metódusok, document.body.appendChild, valamint extends és super is.</p>
-    <div id="orderContainer"></div>
   </div>
-  
+  <!-- Közösségi média elérhetőségek -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<div class="social-links">
+<a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+<i class="fab fa-facebook-f"></i>
+</a>
+<a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+<i class="fab fa-instagram"></i>
+</a>
+</div>
+  </aside>
+  <div id="content">
+    <div id="orderContainer">
+      <h2>OOJS Alkalmazás - Rendeléskezelés</h2>
+      <!-- A rendelési adatok dinamikusan kerülnek ide -->
+    </div>
+  </div>
   <footer>
     <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
-  
   <script>
-    // Alap rendelés osztály
+    // OOJS alkalmazás kód - objektumorientált rendeléskezelés
     class Order {
       constructor(product, quantity, price) {
         this.product = product;
         this.quantity = quantity;
         this.price = price;
       }
-      
       getTotal() {
         return this.quantity * this.price;
       }
-      
       render() {
         const div = document.createElement("div");
-        div.innerHTML = `<strong>${this.product}</strong> - Mennyiség: ${this.quantity}, Ár: ${this.price} Ft, Összesen: ${this.getTotal()} Ft`;
+        div.classList.add("order-item");
+        div.innerHTML = `<p><strong>${this.product}</strong> | Mennyiség: ${this.quantity} | Ár: ${this.price} Ft | Összeg: ${this.getTotal()} Ft</p>`;
         return div;
       }
     }
     
-    // Speciális rendelés osztály, kedvezménnyel
     class SpecialOrder extends Order {
       constructor(product, quantity, price, discount) {
         super(product, quantity, price);
         this.discount = discount;
       }
-      
       getTotal() {
         const total = super.getTotal();
-        return total - (total * this.discount / 100);
+        return (total - (total * this.discount / 100)).toFixed(2);
       }
-      
       render() {
         const div = super.render();
+        div.classList.add("special-order");
         const discountInfo = document.createElement("p");
-        discountInfo.textContent = `Kedvezmény: ${this.discount}% - Kedvezménnyel: ${this.getTotal()} Ft`;
+        discountInfo.style.fontSize = "0.9em";
+        discountInfo.style.color = "#FF9800";
+        discountInfo.textContent = `Kedvezmény: ${this.discount}% | Kedvezménnyel: ${this.getTotal()} Ft`;
         div.appendChild(discountInfo);
         return div;
       }
@@ -92,15 +123,32 @@
     
     document.addEventListener("DOMContentLoaded", function() {
       const container = document.getElementById("orderContainer");
-      const order1 = new Order("Leves", 2, 1200);
-      const order2 = new Order("Főétel", 1, 2500);
-      const order3 = new Order("Desszert", 3, 800);
-      const specialOrder = new SpecialOrder("Vegetáriánus", 4, 1500, 10);
       
-      container.appendChild(order1.render());
-      container.appendChild(order2.render());
-      container.appendChild(order3.render());
-      container.appendChild(specialOrder.render());
+      // Példák: néhány rendelés létrehozása
+      const orders = [
+        new Order("Leves", 2, 1200),
+        new Order("Főétel", 1, 2500),
+        new Order("Desszert", 3, 800),
+        new SpecialOrder("Vegetáriánus", 4, 1500, 10)
+      ];
+      
+      orders.forEach(order => {
+        container.appendChild(order.render());
+      });
+    });
+  </script>
+  <script>
+    // Aktív menüpont beállítása a navigációban
+    document.addEventListener("DOMContentLoaded", function () {
+      const currentPage = window.location.pathname.split("/").pop();
+      const menuLinks = document.querySelectorAll("nav ul li a");
+      menuLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
     });
   </script>
 </body>

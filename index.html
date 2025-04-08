@@ -27,19 +27,56 @@
           <li><a href="order.html" id="orderLink">Rendelés</a></li>
           <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
           <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
-          <li><a href="html5_menu.html" id="html5Link">HTML5 API-k</a></li>
           <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
         </ul>
     </nav>
-      
-    <!-- Aside elem hozzáadása -->
-    <aside>
-      <p>Itt jelenhetnek meg kiegészítő információk, például a cég hírei vagy egyéb linkek.</p>
-    </aside>
-    
     <div id="content">
         <p>Üdvözöljük a Smart Kitchen honlapján!</p>
     </div>
+      <!-- Közösségi média elérhetőségek -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+<div class="social-links">
+  <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+</div>
+
+    <!-- Hírcsatorna widget az aside részben -->
+<aside id="newsWidget" style="margin: 20px; padding: 20px; border: 1px solid #ddd; background-color: #fff;">
+    <h3>Legfrissebb híreink</h3>
+    <div id="newsContent">Töltés...</div>
+  </aside>
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Statikus hírek tömbje
+    const newsData = [
+      { title: "Új termékünk megjelent", link: "https://cegblog.hu/uj-termek" },
+      { title: "Cégünknél új fejlesztések", link: "https://cegblog.hu/fejlesztesek" },
+      { title: "Esemény: Smart Kitchen fesztivál", link: "https://cegblog.hu/fesztival" }
+    ];
+    
+    // Az aside elemben lévő hírek megjelenítése
+    const newsContentDiv = document.getElementById("newsContent");
+    newsContentDiv.innerHTML = ""; // Töröljük az alapértelmezett szöveget
+    newsData.forEach(function(item) {
+      newsContentDiv.innerHTML += '<p><a href="' + item.link + '" target="_blank">' + item.title + '</a></p>';
+    });
+  });
+  </script>
+  
+    
+    <div id="mediaContainer" style="margin: 20px; padding: 20px; border: 1px solid #ddd; background-color: #fff;">
+        <h2>Konyhai Bemutató Videó</h2>
+        <video width="320" height="240" controls>
+          <source src="videos/bemutato.mp4" type="video/mp4">
+          A böngésződ nem támogatja a videó lejátszását.
+        </video>
+      </div>
 
     <div id="menu-section">
         <h2>Napi menü</h2>

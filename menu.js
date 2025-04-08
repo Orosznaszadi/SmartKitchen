@@ -1,76 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const orderForm = document.getElementById("orderForm");
-    const foodSelect = document.getElementById("food");
-    const quantityInput = document.getElementById("quantity");
-    const cartTableBody = document.querySelector("#cart tbody");
-    const totalPriceElement = document.getElementById("totalPrice");
-
-    let cart = []; // Kosár tartalma, ami objektumokat fog tartalmazni
-
-    // Ételek és áraik
-    const foodPrices = {
-        leves: 1500,
-        foetel: 2500,
-        desszert: 1000,
-        vegetáriánus: 2000
-    };
-
-    function updateCart() {
-        cartTableBody.innerHTML = "";
-        let totalPrice = 0;
-
-        cart.forEach(item => {
-            const row = document.createElement("tr");
-
-            const foodCell = document.createElement("td");
-            foodCell.textContent = item.food;
-            row.appendChild(foodCell);
-
-            const priceCell = document.createElement("td");
-            priceCell.textContent = item.price + " Ft";
-            row.appendChild(priceCell);
-
-            const quantityCell = document.createElement("td");
-            quantityCell.textContent = item.quantity;
-            row.appendChild(quantityCell);
-
-            const sumCell = document.createElement("td");
-            sumCell.textContent = (item.price * item.quantity) + " Ft";
-            row.appendChild(sumCell);
-
-            const actionCell = document.createElement("td");
-            const removeBtn = document.createElement("button");
-            removeBtn.textContent = "Törlés";
-            removeBtn.addEventListener("click", function () {
-                cart = cart.filter(cartItem => cartItem !== item);
-                updateCart();
-            });
-            actionCell.appendChild(removeBtn);
-            row.appendChild(actionCell);
-
-            cartTableBody.appendChild(row);
-            totalPrice += item.price * item.quantity;
-        });
-
-        totalPriceElement.textContent = totalPrice;
-    }
-
-    if(orderForm) {
-      orderForm.addEventListener("submit", function (event) {
-          event.preventDefault();
-          const selectedFood = foodSelect.value;
-          const quantity = parseInt(quantityInput.value);
-          const price = foodPrices[selectedFood];
-          const existingItem = cart.find(item => item.food === selectedFood);
-          if (existingItem) {
-              existingItem.quantity += quantity;
-          } else {
-              cart.push({ food: selectedFood, price: price, quantity: quantity });
-          }
-          updateCart();
-      });
-    }
-
+// 1. Aktív menüpont beállítása
+document.addEventListener("DOMContentLoaded", function() {
     const currentUrl = window.location.href;
     const homeLink = document.getElementById("homeLink");
     const menuLink = document.getElementById("menuLink");
@@ -88,12 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Már meglévő táblázat funkciók (rendezés, kategória és elérhetőség duplakattintással történő módosítása)
+// 2. Táblázat rendezés, kategória illetve elérhetőség duplakattintásos módosítása
 document.addEventListener("DOMContentLoaded", function () {
     const menuTable = document.getElementById("menuTable");
     if (!menuTable) return; // Ha nincs táblázat, kilépünk
 
-    // 1. Táblázat rendezése fejlécre kattintva
+    // 2.1 Táblázat rendezése fejlécre kattintva
     const headers = menuTable.querySelectorAll("thead th");
     headers.forEach((header, index) => {
         // Csak az első négy oszlop esetén (Étel, Ár, Kategória, Elérhetőség)
@@ -129,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         rows.forEach(row => tbody.appendChild(row));
     }
 
-    // 2. Kategória cella dupla kattintás – lenyíló a kategóriák választásához
+    // 2.2 Kategória cella dupla kattintás – lenyíló a kategóriák választásához
     const availableCategories = ["Főétel", "Vegetáriánus", "Leves", "Desszert"];
     const rows = menuTable.querySelectorAll("tbody tr");
     rows.forEach(row => {
@@ -161,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 3. Elérhetőség cella dupla kattintás – lenyíló az elérhetőség módosításához
+    // 2.3 Elérhetőség cella dupla kattintás – lenyíló az elérhetőség módosításához
     rows.forEach(row => {
         const availabilityCell = row.cells[3]; // 4. oszlop: Elérhetőség
         availabilityCell.addEventListener("dblclick", function () {
@@ -191,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Új funkciók: "Új étel hozzáadása" gomb és kereső funkció
+// 3. Új étel hozzáadása és kereső funkció
 document.addEventListener("DOMContentLoaded", function () {
     // Új étel hozzáadása gomb funkció
     const addItemBtn = document.getElementById("addItem");
@@ -244,4 +173,102 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+});
+
+// 4. Edit, Delete és Kosárba gombok működésének megvalósítása
+document.addEventListener("DOMContentLoaded", function () {
+    const menuTableBody = document.querySelector("#menuTable tbody");
+    menuTableBody.addEventListener("click", function(event) {
+        const target = event.target;
+        const row = target.closest("tr");
+        if (!row) return;
+
+        // Szerkesztés
+        if (target.classList.contains("edit")) {
+            // Az első négy cella (Étel, Ár, Kategória, Elérhetőség) prompt segítségével módosítható
+            const foodCell = row.cells[0];
+            const priceCell = row.cells[1];
+            const categoryCell = row.cells[2];
+            const availabilityCell = row.cells[3];
+
+            // Étel név validáció
+            let newFood = prompt("Új étel neve:", foodCell.textContent.trim());
+            if (newFood === null || newFood.trim() === "") {
+                alert("Az étel neve nem lehet üres!");
+            } else {
+                foodCell.textContent = newFood.trim();
+            }
+
+            // Ár validáció
+            let newPrice = prompt("Új ár (Ft):", priceCell.textContent.trim());
+            if (newPrice === null || newPrice.trim() === "") {
+                alert("Az ár nem lehet üres!");
+            } else {
+                let parsedPrice = parseFloat(newPrice);
+                if (isNaN(parsedPrice)) {
+                    alert("Érvénytelen ár! Kérlek számot adj meg.");
+                } else {
+                    priceCell.textContent = parsedPrice;
+                }
+            }
+
+            // Kategória validáció
+            let newCategory = prompt("Új kategória:", categoryCell.textContent.trim());
+            if (newCategory === null || newCategory.trim() === "") {
+                alert("A kategória nem lehet üres!");
+            } else {
+                categoryCell.textContent = newCategory.trim();
+            }
+
+            // Elérhetőség validáció
+            let newAvailability = prompt("Új elérhetőség (Elérhető/Nem elérhető):", availabilityCell.textContent.trim());
+            if (newAvailability === null || newAvailability.trim() === "") {
+                alert("Az elérhetőség megadása kötelező!");
+            } else {
+                newAvailability = newAvailability.trim();
+                if(newAvailability !== "Elérhető" && newAvailability !== "Nem elérhető") {
+                    alert("Érvénytelen elérhetőség! Csak 'Elérhető' vagy 'Nem elérhető' érték adható meg.");
+                } else {
+                    availabilityCell.textContent = newAvailability;
+                }
+            }
+        }
+        // Törlés
+        else if (target.classList.contains("delete")) {
+            if (confirm("Biztosan törlöd ezt a sort?")) {
+                row.remove();
+            }
+        }
+        // Kosárba gomb kezelése
+        else if (target.classList.contains("addToCartBtn")) {
+            const id = row.getAttribute("data-id") || Date.now();
+            const name = row.cells[0].textContent.trim();
+            const priceText = row.cells[1].textContent.trim();
+            const price = parseFloat(priceText);
+            const category = row.cells[2].textContent.trim();
+            const availability = row.cells[3].textContent.trim();
+            let qtyStr = prompt("Hány adagot szeretnél rendelni?", "1");
+            if (qtyStr === null || qtyStr.trim() === "") {
+                alert("A mennyiség megadása kötelező!");
+                return;
+            }
+            let quantity = parseInt(qtyStr, 10);
+            if (isNaN(quantity) || quantity < 1) {
+                alert("Érvénytelen mennyiség! Kérlek pozitív számot adj meg.");
+                return;
+            }
+            const product = { id, name, price, category, availability, quantity };
+
+            // Kosárba helyezés (localStorage)
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            const existing = cart.find(item => item.id == product.id);
+            if (existing) {
+                existing.quantity += product.quantity;
+            } else {
+                cart.push(product);
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(product.name + " " + product.quantity + " adag kosárba került!");
+        }
+    });
 });
