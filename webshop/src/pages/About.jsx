@@ -27,7 +27,7 @@ export default function About() {
                 Célunk, hogy minden vendégünk úgy érezze, mintha <strong>hazatért volna</strong> – akár egy kiadós vasárnapi ebédre,
                 akár egy gyors, mégis ízletes hétköznapi ebédre érkezik hozzánk.
             </p>
-            <p class="text-lg leading-relaxed">
+            <p className="text-lg leading-relaxed">
                 Üdvözlünk szeretettel a <strong>Smart Kitchen</strong> világában – ahol a hagyomány és innováció találkozik a tányérodon!
             </p>
 

@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-
 function Home() {
     const [menuData, setMenuData] = useState({});
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        fetch('/menuData.json')
+        fetch('/webshop/menuData.json')
             .then(res => res.json())
             .then(data => setMenuData(data));
     }, []);
@@ -56,7 +55,7 @@ function Home() {
         <div className="flex">
 
             <div className="flex-1 p-6 max-w-7xl mx-auto space-y-12">
-                <h1 className="text-4xl font-bold mb-8">Étlap</h1>
+                <h1 className="text-4xl font-bold mb-8"><i className="fa fa-file-alt"></i> Étlap</h1>
                 {Object.entries(menuData).map(([category, items]) => (
                     <section key={category}>
                         <h2 className="text-3xl font-bold mb-6">{category}</h2>
@@ -95,7 +94,7 @@ function Home() {
 
             {/* Kosár oldalsáv */}
             <div className="w-60 bg-gray-100 p-6 border-l border-gray-300">
-                <h2 className="text-2xl font-bold mb-4">🛒 Kosár</h2>
+                <h2 className="text-2xl font-bold mb-4"><i className="fa fa-shopping-cart"></i> Kosár</h2>
                 {cart.length === 0 ? (
                     <p className="text-gray-500">A kosár üres.</p>
                 ) : (
