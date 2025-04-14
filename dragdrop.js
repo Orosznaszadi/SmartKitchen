@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Keresd meg az összes, drag-and-drop-hoz használható sor elemet
+    
     const tableRows = document.querySelectorAll("#menuTable tbody tr");
     tableRows.forEach(function(row) {
-      // Ha a row nem rendelkezik már draggable attribútummal, biztosítjuk:
+      
       row.setAttribute("draggable", "true");
   
-      // Drag start esemény: beállítjuk a termék adatait JSON-ként a dataTransfer objektumba
+      
       row.addEventListener("dragstart", function(e) {
         const product = {
           id: row.getAttribute("data-id"),
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Drop zone események
     const dropZone = document.getElementById("dropZone");
     if (dropZone) {
-      // Drag over: megakadályozzuk az alapértelmezett viselkedést, így engedélyezzük az ejtést
+      
       dropZone.addEventListener("dragover", function(e) {
         e.preventDefault();
       });
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   
-    // Refaktorált kosárba helyező függvény (ugyanaz, amit a gombos módszer is használ)
+    
     function addToCart(product) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const existing = cart.find(item => item.id == product.id);

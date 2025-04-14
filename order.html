@@ -1,147 +1,150 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rendelés - Smart Kitchen</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rendelés - Smart Kitchen</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body class="rendeles-page">
-    <header>
-        <h1>Web-programozás-1 Előadás Házi feladat</h1>
-    </header>
+  <header>
+    <h1>Web-programozás-1 Előadás Házi feladat</h1>
+  </header>
 
+  <!-- Konténer -->
+  <div class="container">
+    <!-- Navigáció -->
     <nav>
-        <ul>
-          <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
-          <li><a href="menu.html" id="menuLink">Menü</a></li>
-          <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
-          <li><a href="order.html" id="orderLink" class="active">Rendelés</a></li>
-          <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
-          <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
-          <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+        <li><a href="menu.html" id="menuLink">Menü</a></li>
+        <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+        <li><a href="order.html" id="orderLink">Rendelés</a></li>
+        <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+        <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
+        <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        <li><a href="webshop" id="webshop">Webshop</a></li>
+      </ul>
     </nav>
-      
-    <!-- Aside elem -->
+
+    <!-- Aside: Közösségi média linkek -->
     <aside>
-       <!-- Közösségi média elérhetőségek -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-
-<div class="social-links">
-  <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-</div>
-
+      <div class="social-links">
+        <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
     </aside>
-    <!-- Delivery Animation Canvas -->
-<div id="deliveryContainer" style="margin:20px; padding:20px; border:1px solid #ddd; background-color:#fff;">
-  <h2>Szállító autó animáció</h2>
-  <canvas id="deliveryCanvas" width="500" height="150" style="border:1px solid #ccc;"></canvas>
-</div>
 
-
-
+    <!-- Fő tartalom -->
     <div id="content">
-        <h2>Bevásárlókosár</h2>
-        <table id="cart">
-            <thead>
-                <tr>
-                    <th>Étel</th>
-                    <th>Ár</th>
-                    <th>Mennyiség</th>
-                    <th>Összeg</th>
-                    <th>Törlés</th>
-                </tr>
-            </thead>
-            <tbody id="cartBody">
-                <!-- A kosár tartalma ide kerül -->
-            </tbody>
-        </table>
-        <h3>Összesen: <span id="totalPrice">0</span> Ft</h3>
-    </div>
-
-    <footer>
-        <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
-        <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
-    </footer>
-
-    <script>
-      function loadCart() {
-        const cartBody = document.getElementById("cartBody");
-        const totalPriceElem = document.getElementById("totalPrice");
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cartBody.innerHTML = "";
-        let totalPrice = 0;
-        cart.forEach(item => {
-          const row = document.createElement("tr");
-
-          const foodCell = document.createElement("td");
-          foodCell.textContent = item.name;
-          row.appendChild(foodCell);
-
-          const priceCell = document.createElement("td");
-          priceCell.textContent = item.price + " Ft";
-          row.appendChild(priceCell);
-
-          const quantityCell = document.createElement("td");
-          quantityCell.textContent = item.quantity;
-          row.appendChild(quantityCell);
-
-          const sumCell = document.createElement("td");
-          const sum = item.price * item.quantity;
-          sumCell.textContent = sum + " Ft";
-          row.appendChild(sumCell);
-
-          const actionCell = document.createElement("td");
-          const removeBtn = document.createElement("button");
-          removeBtn.textContent = "Törlés";
-          removeBtn.addEventListener("click", function() {
-            let removeQtyStr = prompt("Hány adagot szeretnél törölni?", "1");
-            let removeQty = parseInt(removeQtyStr, 10);
-            if (isNaN(removeQty) || removeQty < 1) {
-              alert("Érvénytelen mennyiség!");
-              return;
-            }
-            if (item.quantity > removeQty) {
-              item.quantity -= removeQty;
-            } else {
-              cart = cart.filter(cartItem => cartItem.id !== item.id);
-            }
-            localStorage.setItem("cart", JSON.stringify(cart));
-            loadCart();
-          });
-          actionCell.appendChild(removeBtn);
-          row.appendChild(actionCell);
-
-          cartBody.appendChild(row);
-          totalPrice += sum;
-        });
-        totalPriceElem.textContent = totalPrice;
-      }
+      <!-- Szállító autó animáció -->
+      <div id="deliveryContainer" style="margin:20px; padding:20px; border:1px solid #ddd; background-color:#fff;">
+        <canvas id="deliveryCanvas" width="500" height="150" style="border:1px solid #ccc;"></canvas>
+      </div>
       
-      document.addEventListener("DOMContentLoaded", loadCart);
-    </script>
+      <!-- Bevásárlókosár -->
+      <h2>Bevásárlókosár</h2>
+      <table id="cart">
+        <thead>
+          <tr>
+            <th>Étel</th>
+            <th>Ár</th>
+            <th>Mennyiség</th>
+            <th>Összeg</th>
+            <th>Törlés</th>
+          </tr>
+        </thead>
+        <tbody id="cartBody">
+          <!-- A kosár tartalma ide kerül -->
+        </tbody>
+      </table>
+      <h3>Összesen: <span id="totalPrice">0</span> Ft</h3>
+    </div>
+  </div> <!-- container vége -->
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const currentPage = window.location.pathname.split("/").pop();
-        const navLinks = document.querySelectorAll("nav ul li a");
-        navLinks.forEach(link => {
-          const linkPage = link.getAttribute("href").split("/").pop();
-          if (linkPage === currentPage) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
+  <!-- Lábléc -->
+  <footer>
+    <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
+    <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="canvas.js"></script>
+  <script>
+    function loadCart() {
+      const cartBody = document.getElementById("cartBody");
+      const totalPriceElem = document.getElementById("totalPrice");
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartBody.innerHTML = "";
+      let totalPrice = 0;
+      cart.forEach(item => {
+        const row = document.createElement("tr");
+
+        const foodCell = document.createElement("td");
+        foodCell.textContent = item.name;
+        row.appendChild(foodCell);
+
+        const priceCell = document.createElement("td");
+        priceCell.textContent = item.price + " Ft";
+        row.appendChild(priceCell);
+
+        const quantityCell = document.createElement("td");
+        quantityCell.textContent = item.quantity;
+        row.appendChild(quantityCell);
+
+        const sumCell = document.createElement("td");
+        const sum = item.price * item.quantity;
+        sumCell.textContent = sum + " Ft";
+        row.appendChild(sumCell);
+
+        const actionCell = document.createElement("td");
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Törlés";
+        removeBtn.addEventListener("click", function() {
+          let removeQtyStr = prompt("Hány adagot szeretnél törölni?", "1");
+          let removeQty = parseInt(removeQtyStr, 10);
+          if (isNaN(removeQty) || removeQty < 1) {
+            alert("Érvénytelen mennyiség!");
+            return;
           }
+          if (item.quantity > removeQty) {
+            item.quantity -= removeQty;
+          } else {
+            cart = cart.filter(cartItem => cartItem.id !== item.id);
+          }
+          localStorage.setItem("cart", JSON.stringify(cart));
+          loadCart();
         });
-      });
-    </script>
+        actionCell.appendChild(removeBtn);
+        row.appendChild(actionCell);
 
-<script src="canvas.js"></script>
+        cartBody.appendChild(row);
+        totalPrice += sum;
+      });
+      totalPriceElem.textContent = totalPrice;
+    }
+    
+    document.addEventListener("DOMContentLoaded", loadCart);
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const currentPage = window.location.pathname.split("/").pop();
+      const navLinks = document.querySelectorAll("nav ul li a");
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute("href").split("/").pop();
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+        } else {
+          link.classList.remove("active");
+        }
+      });
+    });
+  </script>
 </body>
 </html>

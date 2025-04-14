@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Étlap - Smart Kitchen</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Extra CSS a húzható elemek és a drop zone stílusához -->
+  
   <style>
     tr[draggable="true"] {
       cursor: move;
@@ -18,148 +18,128 @@
       background-color: #fff;
     }
   </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
   </header>
-  <nav>
-    <ul>
-      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
-      <li><a href="menu.html" id="menuLink" class="active">Menü</a></li>
-      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
-      <li><a href="order.html" id="orderLink">Rendelés</a></li>
-      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
-      <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
-      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-    </ul>
-  </nav>  
-  <!-- Közösségi média elérhetőségek -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
-<div class="social-links">
-  <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-</div>
+  <!-- Konténer -->
+  <div class="container">
+    <!-- Navigáció -->
+    <nav>
+      <ul>
+        <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+        <li><a href="menu.html" id="menuLink">Menü</a></li>
+        <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+        <li><a href="order.html" id="orderLink">Rendelés</a></li>
+        <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+        <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
+        <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        <li><a href="webshop" id="webshop">Webshop</a></li>
+      </ul>
+    </nav>
 
-  
-  <div id="content">
-    <button id="addItem">Új étel hozzáadása</button>
-    <h2>Étlap</h2>
-    
-    <!-- Drop zone a táblázat fölött -->
-    <div id="dropZone">
-      <h2>Húzd ide a terméket a kosárba!</h2>
-      <p>Itt fognak megjelenni a hozzáadott termékek.</p>
+    <!-- Közösségi média linkek -->
+    <div class="social-links">
+      <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
     </div>
-    
-    <!-- Keresőmező -->
-    <div id="searchInput-container">
-      <input type="text" id="searchInput" placeholder="Keresés...">
+
+    <!-- Fő tartalom -->
+    <div id="content">
+      <button id="addItem">Új étel hozzáadása</button>
+      <h2>Étlap</h2>
+      
+      <!-- Drop zone -->
+      <div id="dropZone">
+        <h2>Húzd ide a terméket a kosárba!</h2>
+        <p>Itt fognak megjelenni a hozzáadott termékek.</p>
+      </div>
+      
+      <!-- Keresőmező -->
+      <div id="searchInput-container">
+        <input type="text" id="searchInput" placeholder="Keresés...">
+      </div>
+      
+      <!-- Táblázat -->
+      <div id="menuTableContainer">
+        <table id="menuTable">
+          <thead>
+            <tr>
+              <th>Étel</th>
+              <th>Ár (Ft)</th>
+              <th>Kategória</th>
+              <th>Elérhetőség</th>
+              <th>Művelet</th>
+              <th>Kosárba</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-id="1" draggable="true">
+              <td>Paprikás csirke</td>
+              <td>2500</td>
+              <td>Főétel</td>
+              <td class="availability">Elérhető</td>
+              <td class="actions">
+                <button class="edit"><i class="fa fa-edit"></i></button>
+                <button class="delete"><i class="fa fa-trash"></i></button>
+              </td>
+              <td>
+                <button class="addToCartBtn"><i class="fa fa-shopping-cart"></i></button>
+              </td>
+            </tr>
+            <tr data-id="2" draggable="true">
+              <td>Rántott sajt</td>
+              <td>2200</td>
+              <td>Vegetáriánus</td>
+              <td class="availability">Elérhető</td>
+              <td class="actions">
+                <button class="edit"><i class="fa fa-edit"></i></button>
+                <button class="delete"><i class="fa fa-trash"></i></button>
+              </td>
+              <td>
+                <button class="addToCartBtn"><i class="fa fa-shopping-cart"></i></button>
+              </td>
+            </tr>
+            <tr data-id="3" draggable="true">
+              <td>Gulyásleves</td>
+              <td>1800</td>
+              <td>Leves</td>
+              <td class="availability">Elérhető</td>
+              <td class="actions">
+                <button class="edit"><i class="fa fa-edit"></i></button>
+                <button class="delete"><i class="fa fa-trash"></i></button>
+              </td>
+              <td>
+                <button class="addToCartBtn"><i class="fa fa-shopping-cart"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    
-    <!-- Táblázat -->
-    <div id="menuTableContainer">
-      <table id="menuTable">
-        <thead>
-          <tr>
-            <th>Étel</th>
-            <th>Ár (Ft)</th>
-            <th>Kategória</th>
-            <th>Elérhetőség</th>
-            <th>Művelet</th>
-            <th>Kosárba</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr data-id="1" draggable="true">
-            <td>Paprikás csirke</td>
-            <td>2500</td>
-            <td>Főétel</td>
-            <td class="availability">Elérhető</td>
-            <td class="actions">
-              <button class="edit">Szerkesztés</button>
-              <button class="delete">Törlés</button>
-            </td>
-            <td>
-              <button class="addToCartBtn">Kosárba</button>
-            </td>
-          </tr>
-          <tr data-id="2" draggable="true">
-            <td>Rántott sajt</td>
-            <td>2200</td>
-            <td>Vegetáriánus</td>
-            <td class="availability">Elérhető</td>
-            <td class="actions">
-              <button class="edit">Szerkesztés</button>
-              <button class="delete">Törlés</button>
-            </td>
-            <td>
-              <button class="addToCartBtn">Kosárba</button>
-            </td>
-          </tr>
-          <tr data-id="3" draggable="true">
-            <td>Gulyásleves</td>
-            <td>1800</td>
-            <td>Leves</td>
-            <td class="availability">Elérhető</td>
-            <td class="actions">
-              <button class="edit">Szerkesztés</button>
-              <button class="delete">Törlés</button>
-            </td>
-            <td>
-              <button class="addToCartBtn">Kosárba</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <!-- Geolocation szekció -->
-    <div id="geoContainer" style="margin: 20px; padding: 20px; border: 1px solid #ddd; background-color: #fff;">
-      <h2>Helymeghatározás</h2>
-      <button id="getLocationBtn">Mutassa a helyemet!</button>
-      <p id="geoOutput">Itt fognak megjelenni a helyadatok.</p>
-    </div>
-    
-    <!-- Web Storage szekció -->
-    <div id="storageContainer" style="margin: 20px; padding: 20px; border: 1px solid #ddd; background-color: #fff;">
-      <h2>Web Storage Példa</h2>
-      <input type="text" id="storageInput" placeholder="Írj be valamit...">
-      <button id="saveStorageBtn">Mentés</button>
-      <button id="clearStorageBtn">Törlés</button>
-      <p id="storageOutput">Itt láthatod a mentett adatokat.</p>
-    </div>
-  </div>
-  <!-- SSE szekció -->
-<div id="sseContainer" style="margin: 20px; padding: 20px; border: 1px solid #ddd; background-color: #fff;">
-  <h2>Valós idejű Frissítések</h2>
-  <div id="sseOutput">Itt jelennek meg az aktuális rendelési értesítések...</div>
-</div>
-<!-- Web Worker Példa szekció -->
-<div id="workerContainer" style="margin:20px; padding:20px; border:1px solid #ddd; background-color:#fff;">
-  <h2>Web Worker Példa</h2>
-  <button id="startWorkerBtn">Indítsd el a munkást!</button>
-  <p id="workerOutput">Itt jelennek meg a worker üzenetek.</p>
-</div>
-  
+  </div> <!-- container vége -->
+
+  <!-- Lábléc -->
   <footer>
     <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
-  
-  <!-- Script hivatkozások -->
+
+  <!-- JavaScript hivatkozások -->
   <script src="menu.js"></script>
   <script src="geo.js"></script>
   <script src="storage.js"></script>
   <script src="dragdrop.js"></script>
   <script src="sse.js"></script>
   <script src="workerDemo.js"></script>
-
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const currentPage = window.location.pathname.split("/").pop();

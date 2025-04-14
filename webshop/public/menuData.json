@@ -1,0 +1,80 @@
+{
+  "Főételek": [
+    {
+      "id": 52772,
+      "name": "Sült csirke",
+      "price": 2800,
+      "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
+    },
+    {
+      "id": 52814,
+      "name": "Cordon bleu",
+      "price": 3200,
+      "image": "https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg"
+    },
+    {
+      "id": 52819,
+      "name": "Marhapörkölt",
+      "price": 2500,
+      "image": "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg"
+    },
+    {
+      "id": 52823,
+      "name": "Borsófőzelék",
+      "price": 1800,
+      "image": "https://www.themealdb.com/images/media/meals/sxxpst1468569714.jpg"
+    },
+    {
+      "id": 52824,
+      "name": "Bakonyi sertésborda",
+      "price": 3400,
+      "image": "https://www.themealdb.com/images/media/meals/qxytrx1511304021.jpg"
+    },
+    {
+      "id": 52825,
+      "name": "Milánói makaróni",
+      "price": 2600,
+      "image": "https://www.themealdb.com/images/media/meals/0jv5gx1661040802.jpg"
+    }
+  ],
+  "Köretek": [
+    {
+      "id": 52826,
+      "name": "Párolt rizs",
+      "price": 800,
+      "image": "https://www.themealdb.com/images/media/meals/1529446137.jpg"
+    },
+    {
+      "id": 52827,
+      "name": "Hasábburgonya",
+      "price": 900,
+      "image": "https://www.themealdb.com/images/media/meals/1548772327.jpg"
+    },
+    {
+      "id": 52828,
+      "name": "Tarhonya",
+      "price": 850,
+      "image": "https://www.themealdb.com/images/media/meals/wyrqqq1468233628.jpg"
+    },
+    {
+      "id": 52829,
+      "name": "Friss vegyes saláta",
+      "price": 700,
+      "image": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg"
+    }
+  ],
+  "Deszertek": [
+    {
+      "id": 52830,
+      "name": "Gundel palacsinta",
+      "price": 1000,
+      "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+    },
+    {
+      "id": 52831,
+      "name": "Somlói galuska",
+      "price": 1200,
+      "image": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg"
+    }
+  ]
+}

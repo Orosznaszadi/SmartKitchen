@@ -6,7 +6,7 @@
   <title>Smart Kitchen - OOJS Alkalmazás</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Új stílusok az OOJS kártya elrendezéséhez */
+    /* OOJS kártya elrendezés stílusai */
     #orderContainer {
       max-width: 600px;
       margin: 30px auto;
@@ -40,49 +40,58 @@
       background-color: #FFF3E0;
     }
   </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
   </header>
-  <nav>
-    <ul>
-      <li><a href="index.html">Kezdőlap</a></li>
-      <li><a href="menu.html">Menü</a></li>
-      <li><a href="contact.html">Kapcsolat</a></li>
-      <li><a href="order.html">Rendelés</a></li>
-      <li><a href="chartjs.html">Eladások</a></li>
-      <li><a href="ajax.html">AJAX</a></li>
-      <li><a href="oojs.html" class="active">OOJS</a></li>
-    </ul>
-  </nav>
-  <!-- Aside elem -->
-  <aside>
-  </div>
-  <!-- Közösségi média elérhetőségek -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
-<div class="social-links">
-<a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-<i class="fab fa-facebook-f"></i>
-</a>
-<a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-<i class="fab fa-instagram"></i>
-</a>
-</div>
-  </aside>
-  <div id="content">
-    <div id="orderContainer">
-      <h2>OOJS Alkalmazás - Rendeléskezelés</h2>
-      <!-- A rendelési adatok dinamikusan kerülnek ide -->
+  <!-- Konténer -->
+  <div class="container">
+    <!-- Navigáció -->
+    <nav>
+      <ul>
+        <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+        <li><a href="menu.html" id="menuLink">Menü</a></li>
+        <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+        <li><a href="order.html" id="orderLink">Rendelés</a></li>
+        <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+        <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
+        <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        <li><a href="webshop" id="webshop">Webshop</a></li>
+      </ul>
+    </nav>
+
+    <!-- Közösségi média linkek -->
+    <div class="social-links">
+      <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
     </div>
-  </div>
+
+    <!-- Fő tartalom -->
+    <div id="content">
+      <div id="orderContainer">
+        <h2>OOJS Alkalmazás - Rendeléskezelés</h2>
+        <!-- A rendelési adatok dinamikusan kerülnek ide -->
+      </div>
+    </div>
+  </div> <!-- container vége -->
+
+  <!-- Lábléc -->
   <footer>
     <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
+
+  <!-- JavaScript kódok -->
   <script>
-    // OOJS alkalmazás kód - objektumorientált rendeléskezelés
+    // OOJS alkalmazás kód – objektumorientált rendeléskezelés
     class Order {
       constructor(product, quantity, price) {
         this.product = product;
@@ -123,27 +132,24 @@
     
     document.addEventListener("DOMContentLoaded", function() {
       const container = document.getElementById("orderContainer");
-      
-      // Példák: néhány rendelés létrehozása
       const orders = [
         new Order("Leves", 2, 1200),
         new Order("Főétel", 1, 2500),
         new Order("Desszert", 3, 800),
         new SpecialOrder("Vegetáriánus", 4, 1500, 10)
       ];
-      
       orders.forEach(order => {
         container.appendChild(order.render());
       });
     });
   </script>
   <script>
-    // Aktív menüpont beállítása a navigációban
-    document.addEventListener("DOMContentLoaded", function () {
+    // Aktív menüpont beállítása
+    document.addEventListener("DOMContentLoaded", function() {
       const currentPage = window.location.pathname.split("/").pop();
       const menuLinks = document.querySelectorAll("nav ul li a");
       menuLinks.forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
+        if(link.getAttribute("href") === currentPage) {
           link.classList.add("active");
         } else {
           link.classList.remove("active");

@@ -1,6 +1,6 @@
-// Az aktuális oldal alapján beállítjuk az aktív menüpontot
+
 document.addEventListener("DOMContentLoaded", function () {
-    const currentPage = window.location.pathname.split("/").pop(); // Az aktuális fájlnév
+    const currentPage = window.location.pathname.split("/").pop(); 
     const menuLinks = document.querySelectorAll("nav ul li a");
 
     menuLinks.forEach(link => {

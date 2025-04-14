@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Kitchen - AJAX CRUD</title>
   <link rel="stylesheet" href="styles.css">
+  
   <style>
-    /* Extra stílusok a AJAX formhoz – konyhai, modern megjelenés */
     .ajax-container {
       max-width: 600px;
       margin: 30px auto;
@@ -71,79 +71,84 @@
       color: #333;
     }
   </style>
+  <!-- Font Awesome ikonok -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
   </header>
-  <nav>
-    <ul>
-      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
-      <li><a href="menu.html" id="menuLink">Menü</a></li>
-      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
-      <li><a href="order.html" id="orderLink">Rendelés</a></li>
-      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
-      <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
-      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-    </ul>
-  </nav>
-  
-  <!-- Aside elem: itt elhelyezhetsz közösségi média linkeket stb. -->
-  <aside>
-  </div>
-  <!-- Közösségi média elérhetőségek -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
-<div class="social-links">
-<a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-<i class="fab fa-facebook-f"></i>
-</a>
-<a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-<i class="fab fa-instagram"></i>
-</a>
-</div>
-  </aside>
-  
-  <!-- AJAX CRUD Felület fő tartalma -->
-  <div id="content">
-    <div class="ajax-container">
-      <h2>AJAX CRUD Felület</h2>
-      <p>Az alábbi űrlap segítségével kezelheted a Smart Kitchen adatait. Minden mező megadása kötelező, és maximum 30 karakter engedélyezett.</p>
-      <form id="ajaxForm">
-        <label for="name">Termék neve:</label>
-        <input type="text" id="name" name="name" maxlength="30" placeholder="Pl. Paprikás csirke" required>
-        
-        <label for="height">Eladott mennyiség:</label>
-        <input type="text" id="height" name="height" maxlength="30" placeholder="Pl. 25" required>
-        
-        <label for="weight">Ár (Ft):</label>
-        <input type="text" id="weight" name="weight" maxlength="30" placeholder="Pl. 2500" required>
-        
-        <div class="crud-buttons">
-          <button type="button" id="createBtn">Létrehozás</button>
-          <button type="button" id="updateBtn">Módosítás</button>
-        </div>
-      </form>
-      <div style="margin-top:15px;">
-        <label for="updateId">Módosítandó rekord ID:</label>
-        <input type="text" id="updateId" name="updateId" placeholder="Rekord ID">
-        <div class="crud-buttons">
-          <button type="button" id="getDataForIdBtn">Adatok betöltése ID alapján</button>
-          <button type="button" id="deleteBtn">Törlés</button>
-        </div>
+  <!-- Konténer -->
+  <div class="container">
+    <!-- Navigáció -->
+    <nav>
+      <ul>
+        <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+        <li><a href="menu.html" id="menuLink">Menü</a></li>
+        <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+        <li><a href="order.html" id="orderLink">Rendelés</a></li>
+        <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+        <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
+        <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        <li><a href="webshop" id="webshop">Webshop</a></li>
+      </ul>
+    </nav>
+
+    <!-- Aside (közösségi média linkek) -->
+    <aside>
+      <div class="social-links">
+        <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
       </div>
-      <h3>Adatok listája</h3>
-      <div id="dataList" class="data-display"></div>
-      <h3>Statisztikák a "Eladott mennyiség" értékekről</h3>
-      <div id="stats" class="stats"></div>
+    </aside>
+
+    <!-- AJAX CRUD felület tartalma -->
+    <div id="content">
+      <div class="ajax-container">
+        <h2>AJAX CRUD Felület</h2>
+        <p>Az alábbi űrlap segítségével kezelheted a Smart Kitchen adatait. Minden mező megadása kötelező, és maximum 30 karakter engedélyezett.</p>
+        <form id="ajaxForm">
+          <label for="name">Termék neve:</label>
+          <input type="text" id="name" name="name" maxlength="30" placeholder="Pl. Paprikás csirke" required>
+          
+          <label for="height">Eladott mennyiség:</label>
+          <input type="text" id="height" name="height" maxlength="30" placeholder="Pl. 25" required>
+          
+          <label for="weight">Ár (Ft):</label>
+          <input type="text" id="weight" name="weight" maxlength="30" placeholder="Pl. 2500" required>
+          
+          <div class="crud-buttons">
+            <button type="button" id="createBtn">Létrehozás</button>
+            <button type="button" id="updateBtn">Módosítás</button>
+          </div>
+        </form>
+        <div style="margin-top:15px;">
+          <label for="updateId">Módosítandó rekord ID:</label>
+          <input type="text" id="updateId" name="updateId" placeholder="Rekord ID">
+          <div class="crud-buttons">
+            <button type="button" id="getDataForIdBtn">Adatok betöltése ID alapján</button>
+            <button type="button" id="deleteBtn">Törlés</button>
+          </div>
+        </div>
+        <h3>Adatok listája</h3>
+        <div id="dataList" class="data-display"></div>
+        <h3>Statisztikák a "Eladott mennyiség" értékekről</h3>
+        <div id="stats" class="stats"></div>
+      </div>
     </div>
-  </div>
-  
+  </div> <!-- container vége -->
+
+  <!-- Lábléc -->
   <footer>
     <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
-  
+
   <!-- Script hivatkozások -->
   <script src="ajax.js"></script>
   <script>
@@ -152,7 +157,7 @@
       const navLinks = document.querySelectorAll("nav ul li a");
       navLinks.forEach(link => {
         const linkPage = link.getAttribute("href");
-        if (linkPage === currentPage) {
+        if(linkPage === currentPage) {
           link.classList.add("active");
         } else {
           link.classList.remove("active");

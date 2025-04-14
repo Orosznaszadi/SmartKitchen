@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Kitchen - Napi Eladott Mennyiség</title>
-  <!-- ChartJS CDN betöltése -->
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="styles.css">
   <style>
@@ -23,121 +23,127 @@
       cursor: pointer;
     }
   </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
-</header>
+  </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
-      <li><a href="menu.html" id="menuLink">Menü</a></li>
-      <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
-      <li><a href="order.html" id="orderLink">Rendelés</a></li>
-      <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
-      <li><a href="ajax.html" id="ajaxLink">AJAX</a></li>
-      <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-    </ul>
-  </nav>
-  
-  <!-- Aside elem -->
-  <aside>
-    <!-- Közösségi média elérhetőségek -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Konténer -->
+  <div class="container">
+    <!-- Navigáció -->
+    <nav>
+      <ul>
+        <li><a href="index.html" id="homeLink">Kezdőlap</a></li>
+        <li><a href="menu.html" id="menuLink">Menü</a></li>
+        <li><a href="contact.html" id="contactLink">Kapcsolat</a></li>
+        <li><a href="order.html" id="orderLink">Rendelés</a></li>
+        <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
+        <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
+        <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
+        <li><a href="webshop" id="webshop">Webshop</a></li>
+      </ul>
+    </nav>
 
-<div class="social-links">
-  <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-</div>
+    <!-- Aside: Közösségi média linkek -->
+    <aside>
+      <div class="social-links">
+        <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </div>
+    </aside>
 
-  </aside>
+    <!-- Fő tartalom -->
+    <div id="content">
+      <h2>Napi Eladott Mennyiség Összesítése</h2>
+      <p>A táblázatban az első oszlop az ételkategóriákat, a többi oszlop pedig a hét napjait jelöli. Kattints egy sorra, hogy vonaldiagramon lásd az adott kategória napi eladott mennyiségét!</p>
+      
+      <!-- Táblázat -->
+      <table id="salesTable">
+        <thead>
+          <tr>
+            <th>Kategória</th>
+            <th>Hétfő</th>
+            <th>Kedd</th>
+            <th>Szerda</th>
+            <th>Csütörtök</th>
+            <th>Péntek</th>
+            <th>Szombat</th>
+            <th>Vasárnap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Leves</td>
+            <td>12</td>
+            <td>15</td>
+            <td>13</td>
+            <td>14</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td>Főétel</td>
+            <td>25</td>
+            <td>26</td>
+            <td>24</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>Desszert</td>
+            <td>8</td>
+            <td>9</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Köret</td>
+            <td>10</td>
+            <td>11</td>
+            <td>10</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>Vegetáriánus</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+          </tr>
+        </tbody>
+      </table>
 
-  <div id="content">
-    <h2>Napi Eladott Mennyiség Összesítése</h2>
-    <p>A táblázatban az első oszlop az ételkategóriákat, a többi oszlop pedig a hét napjait jelöli. Kattints egy sorra, hogy vonaldiagramon lásd az adott kategória napi eladott mennyiségét!</p>
-    
-    <!-- Táblázat: az első oszlop a kategória, a következő 7 oszlop a hét napjai -->
-    <table id="salesTable">
-      <thead>
-        <tr>
-          <th>Kategória</th>
-          <th>Hétfő</th>
-          <th>Kedd</th>
-          <th>Szerda</th>
-          <th>Csütörtök</th>
-          <th>Péntek</th>
-          <th>Szombat</th>
-          <th>Vasárnap</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Leves</td>
-          <td>12</td>
-          <td>15</td>
-          <td>13</td>
-          <td>14</td>
-          <td>16</td>
-          <td>17</td>
-          <td>18</td>
-        </tr>
-        <tr>
-          <td>Főétel</td>
-          <td>25</td>
-          <td>26</td>
-          <td>24</td>
-          <td>27</td>
-          <td>28</td>
-          <td>29</td>
-          <td>30</td>
-        </tr>
-        <tr>
-          <td>Desszert</td>
-          <td>8</td>
-          <td>9</td>
-          <td>8</td>
-          <td>9</td>
-          <td>10</td>
-          <td>11</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>Köret</td>
-          <td>10</td>
-          <td>11</td>
-          <td>10</td>
-          <td>12</td>
-          <td>13</td>
-          <td>14</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>Vegetáriánus</td>
-          <td>14</td>
-          <td>15</td>
-          <td>16</td>
-          <td>17</td>
-          <td>18</td>
-          <td>19</td>
-          <td>20</td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- Diagram canvas -->
+      <canvas id="salesChart" width="400" height="200"></canvas>
+    </div>
+  </div> <!-- container vége -->
 
-    <!-- A diagram megjelenítéséhez szolgáló canvas -->
-    <canvas id="salesChart" width="400" height="200"></canvas>
-  </div>
-
+  <!-- Lábléc -->
   <footer>
     <p>Készítette: [Orosz-Naszádi Krisztina] - Neptun kód: [QS3OF7]</p>
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
 
+  <!-- JavaScript kódok -->
   <script>
     const salesTable = document.getElementById("salesTable");
     const tbody = salesTable.querySelector("tbody");
@@ -196,6 +202,5 @@
       });
     });
   </script>
-    
 </body>
 </html>
