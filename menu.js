@@ -146,11 +146,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${category}</td>
                 <td class="availability">${availability}</td>
                 <td class="actions">
-                  <button class="edit">Szerkesztés</button>
-                  <button class="delete">Törlés</button>
+                  <button class="edit"><i class="fa fa-edit"></i></button>
+                  <button class="delete"><i class="fa fa-trash"></i></button>
                 </td>
                 <td>
-                  <button class="addToCartBtn">Kosárba</button>
+                  <button class="addToCartBtn"><i class="fa fa-shopping-cart"></i></button>
                 </td>
             `;
             menuTableBody.appendChild(newRow);
