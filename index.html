@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Kitchen - Kezdőlap</title>
   <link rel="stylesheet" href="styles.css">
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <style>
       body {
@@ -24,7 +24,7 @@
 
   <!-- Konténer -->
   <div class="container">
-    
+
     <!-- Navigáció -->
     <nav>
       <ul>
@@ -35,7 +35,7 @@
         <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
         <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
         <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-        <li><a href="webshop" id="webshop">Webshop</a></li>
+        <li><a href="react.html" id="webshop">React</a></li>
       </ul>
     </nav>
 
@@ -86,7 +86,7 @@
         <li>Péntek: Halászlé</li>
       </ul>
     </div>
-    
+
   </div> <!-- container vége -->
 
   <!-- Lábléc -->
@@ -110,7 +110,7 @@
         newsContentDiv.innerHTML += '<p><a href="' + item.link + '" target="_blank">' + item.title + '</a></p>';
       });
     });
-    
+
     // Aktív menüpont beállítása
     document.addEventListener("DOMContentLoaded", function() {
       const currentPage = window.location.pathname.split("/").pop();

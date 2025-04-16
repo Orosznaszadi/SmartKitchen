@@ -3,18 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kapcsolat - Smart Kitchen</title>
+  <title>Smart Kitchen - Kezdőlap</title>
   <link rel="stylesheet" href="styles.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+      h2 {
+          color: #4CAF50;
+      }
+  </style>
 </head>
 <body>
+  <!-- Fejléc -->
   <header>
     <h1>Web-programozás-1 Előadás Házi feladat</h1>
   </header>
 
   <!-- Konténer -->
   <div class="container">
+
     <!-- Navigáció -->
     <nav>
       <ul>
@@ -25,30 +35,27 @@
         <li><a href="chartjs.html" id="chartjsLink">Eladások</a></li>
         <li><a href="ajax.html" id="ajaxLink" class="active">AJAX</a></li>
         <li><a href="oojs.html" id="oojsLink">OOJS</a></li>
-        <li><a href="react.html" id="react">React</a></li>
+        <li><a href="react.html" id="webshop">React</a></li>
       </ul>
     </nav>
 
-    <!-- Aside: Közösségi média linkek -->
-    <aside>
-      <div class="social-links">
-        <a href="https://facebook.com/yourpage" target="_blank" class="social-icon facebook">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://instagram.com/yourpage" target="_blank" class="social-icon instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-      </div>
-    </aside>
-
     <!-- Fő tartalom -->
     <div id="content">
-      <h2>Kapcsolat</h2>
-      <p>Elérhetőségünk:</p>
-      <p>📍 Cím: 1234 Budapest, Smart Kitchen utca 1.</p>
-      <p>📞 Telefon: +36 1 234 5678</p>
-      <p>📧 E-mail: info@smartkitchen.hu</p>
+
+      <ul>
+        <li> <a href="webshop/index.html">Webshop</a></li>
+        <li> <a href="deliverygame/index.html">Étel kiszállítás játék</a></li>
+      </ul>
+
+
+
     </div>
+
+
+    <!-- Hírcsatorna widget -->
+
+
+
   </div> <!-- container vége -->
 
   <!-- Lábléc -->
@@ -57,17 +64,6 @@
     <p>Készítette: [Bűdy Szabolcs] - Neptun kód: [F1WQL0]</p>
   </footer>
 
-  <!-- JavaScript a navigációhoz -->
-  <script>
-    const menuLinks = document.querySelectorAll("nav ul li a");
-    const currentLocation = window.location.pathname;
-    menuLinks.forEach(link => {
-      if (link.href.includes(currentLocation)) {
-        link.classList.add("active");
-      } else {
-        link.classList.remove("active");
-      }
-    });
-  </script>
+
 </body>
 </html>
