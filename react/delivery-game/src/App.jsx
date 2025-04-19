@@ -124,9 +124,7 @@ const FoodDeliveryGame = () => {
                             ? "images/delivery_food_red.png"  // ha rossz cellán vagyunk, piros ikon és még szállítunk
                             : hasFood
                                 ? "images/delivery_food.png"    // ha van étel
-                                : isDelivering
-                                    ? "images/delivery_empty.png"    // ha kiszállítottuk és szállítunk
-                                    : "images/delivery_empty.png"    // ha nincs étel (visszatértünk az étteremhez)
+                                : "images/delivery_empty.png"    // ha nincs étel (visszatértünk az étteremhez)
                     }
                     alt="Futár"
                     className="w-8 h-8"
